@@ -44,6 +44,7 @@ Vercel is not on the team yet.
 - Stagger delays must stay on the longhand properties (`animation-name`, `animation-duration`, `animation-timing-function`, `animation-fill-mode`). An `animation` shorthand resets the delay.
 - Do not set `transform` on hover for a `.reveal` element. The rise animation owns `transform`.
 - Map pin: `26.30204, 73.060116`. Countdown target: `2026-11-21T16:15:00+05:30`.
+- पाणिग्रहण संस्कार is `रात्रि 10:15` at `प्लॉट नं. 52बी, गली नं. 13/2`. आशीर्वाद समारोह एवं प्रीतिभोज stays at महाराणा प्रताप पार्क.
 - One deliberate spelling: the hosts' invitation sentence uses सुपौत्री. The bride's parent line stays सुपुत्री.
 - After a visual change, open the page, click Enter, and check the screen that changed. `prefers-reduced-motion` must include any new animated selector and must leave the text visible.
 - Do not commit or deploy unless the user asks.
