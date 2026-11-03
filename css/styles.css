@@ -1264,7 +1264,7 @@ section {
   border-radius: 26px;
   background: rgba(228, 194, 122, 0.2);
   transform: rotate(-1.6deg);
-  transition: transform 0.55s ease;
+  transition: transform 0.55s ease, background 0.55s ease;
 }
 
 .shagun-face {
@@ -1279,7 +1279,7 @@ section {
   background: linear-gradient(180deg, rgba(90, 24, 40, 0.55), rgba(12, 8, 14, 0.82));
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(12px);
-  transition: transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+  transition: transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
 }
 
 /* Faint haveli jali under the facts, so the foot of the card is not a blank glass. */
@@ -1296,6 +1296,7 @@ section {
   background-size: 28px 28px;
   -webkit-mask-image: linear-gradient(transparent, #000 46%);
   mask-image: linear-gradient(transparent, #000 46%);
+  transition: opacity 0.5s ease;
 }
 
 .raj-marks {
@@ -1305,16 +1306,32 @@ section {
   overflow: hidden;
 }
 
+/* Cursor on a ritual: the glass lifts and the gold edge, crest, and seals light up. */
+.shagun-card:hover,
+.shagun-card:focus-within {
+  z-index: 2;
+}
+
 .shagun-card:hover .shagun-plate,
 .shagun-card:focus-within .shagun-plate {
   transform: rotate(0deg);
+  background: rgba(243, 212, 138, 0.72);
 }
 
 .shagun-card:hover .shagun-face,
 .shagun-card:focus-within .shagun-face {
   transform: translateY(-10px);
-  border-color: rgba(228, 194, 122, 0.85);
-  box-shadow: 0 28px 48px rgba(0, 0, 0, 0.5);
+  border-color: #f3d48a;
+  background: linear-gradient(180deg, rgba(141, 42, 62, 0.82), rgba(32, 12, 18, 0.94));
+  box-shadow:
+    0 0 0 1px rgba(243, 212, 138, 0.95),
+    0 0 32px rgba(228, 194, 122, 0.48),
+    0 28px 48px rgba(0, 0, 0, 0.55);
+}
+
+.shagun-card:hover .shagun-face::before,
+.shagun-card:focus-within .shagun-face::before {
+  opacity: 0.55;
 }
 
 .shagun-crest {
@@ -1333,6 +1350,31 @@ section {
   background:
     radial-gradient(circle at 84% 8%, rgba(243, 212, 138, 0.55), transparent 34%),
     linear-gradient(155deg, #c96a22 0%, #7c1e33 48%, #1a0a12 100%);
+}
+
+.shagun-crest,
+.shagun-crest h4 {
+  transition: background 0.5s ease, color 0.5s ease, text-shadow 0.5s ease;
+}
+
+.shagun-card:hover .shagun-crest,
+.shagun-card:focus-within .shagun-crest {
+  background:
+    radial-gradient(circle at 86% 12%, rgba(243, 212, 138, 0.78), transparent 42%),
+    linear-gradient(155deg, #b13b54 0%, #6e2236 55%, #1a0a12 100%);
+}
+
+.shagun-card.vivah:hover .shagun-crest,
+.shagun-card.vivah:focus-within .shagun-crest {
+  background:
+    radial-gradient(circle at 84% 8%, rgba(255, 220, 150, 0.85), transparent 40%),
+    linear-gradient(155deg, #e38a32 0%, #9a2840 48%, #1a0a12 100%);
+}
+
+.shagun-card:hover .shagun-crest h4,
+.shagun-card:focus-within .shagun-crest h4 {
+  color: #fff8e8;
+  text-shadow: 0 0 18px rgba(243, 212, 138, 0.7), 0 2px 12px rgba(0, 0, 0, 0.35);
 }
 
 /*
@@ -1464,8 +1506,23 @@ section {
 .shagun-card:focus-within .shagun-seal {
   color: #fff8e8;
   background:
-    radial-gradient(circle at 50% 40%, rgba(228, 194, 122, 0.85), rgba(201, 106, 34, 0.35) 66%),
-    rgba(18, 8, 12, 0.4);
+    radial-gradient(circle at 50% 40%, rgba(243, 212, 138, 0.95), rgba(201, 106, 34, 0.45) 66%),
+    rgba(18, 8, 12, 0.35);
+  box-shadow:
+    inset 0 0 0 1px #fff1c4,
+    inset 0 0 0 4px rgba(18, 8, 12, 0.4),
+    inset 0 0 0 5px rgba(243, 212, 138, 0.95),
+    0 0 12px rgba(228, 194, 122, 0.55);
+}
+
+.shagun-card:hover .shagun-k,
+.shagun-card:focus-within .shagun-k {
+  color: #ffe7a8;
+}
+
+.shagun-card:hover .shagun-meta,
+.shagun-card:focus-within .shagun-meta {
+  border-top-color: rgba(243, 212, 138, 0.7);
 }
 
 .venue-grid {
