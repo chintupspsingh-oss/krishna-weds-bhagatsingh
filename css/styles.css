@@ -111,7 +111,8 @@ html.has-gate body {
   overflow: hidden;
 }
 
-html.has-gate .petals {
+html.has-gate .petals,
+html.has-gate .toran {
   display: none;
 }
 
@@ -572,6 +573,7 @@ html.has-gate .yt-dhun {
 
 /* Royal court arch: maroon and gold, not the night glass. */
 .jharokha {
+  position: relative;
   width: min(760px, 100%);
   padding: 1.5rem 1.4rem 2.4rem;
   border: 1px solid rgba(228, 194, 122, 0.85);
@@ -2116,7 +2118,7 @@ section {
 .petals {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 20;
   pointer-events: none;
   overflow: hidden;
 }
@@ -2126,25 +2128,138 @@ footer {
   z-index: 1;
 }
 
+/* Flower rain: a rose petal, a marigold, or a gold mote. Clicks pass through. */
 .petals span {
   position: absolute;
-  top: -12px;
-  width: 9px;
-  height: 12px;
-  border-radius: 70% 10% 70% 10%;
-  background: #e0a04a;
-  opacity: 0.55;
-  animation: fall linear infinite;
+  top: -24px;
+  opacity: 0.82;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
-.petals span:nth-child(1) { left: 8%; animation-duration: 14s; animation-delay: -2s; }
-.petals span:nth-child(2) { left: 22%; animation-duration: 18s; background: #8d2a3e; }
-.petals span:nth-child(3) { left: 36%; animation-duration: 12s; animation-delay: -6s; }
-.petals span:nth-child(4) { left: 51%; animation-duration: 16s; background: #f3d48a; }
-.petals span:nth-child(5) { left: 64%; animation-duration: 19s; animation-delay: -9s; background: #8d2a3e; }
-.petals span:nth-child(6) { left: 76%; animation-duration: 13s; }
-.petals span:nth-child(7) { left: 88%; animation-duration: 17s; animation-delay: -4s; background: #f3d48a; }
-.petals span:nth-child(8) { left: 46%; animation-duration: 21s; animation-delay: -11s; }
+.petals .gulab {
+  width: 13px;
+  height: 18px;
+  border-radius: 80% 8% 75% 12%;
+  background: linear-gradient(145deg, #f7d2c8, #a33a4e 55%, #6d1c30);
+}
+
+.petals .genda {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #fff1c4 0 26%, #f0c15a 27% 52%, #c96a22 53% 100%);
+  box-shadow: 0 0 0 2px rgba(201, 106, 34, 0.35);
+}
+
+.petals .sona {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f3d48a;
+  box-shadow: 0 0 8px rgba(243, 212, 138, 0.85);
+}
+
+.petals span:nth-child(odd) { animation-name: fall-a; }
+.petals span:nth-child(even) { animation-name: fall-b; }
+
+.petals span:nth-child(1) { left: 4%; animation-duration: 13s; animation-delay: -2s; }
+.petals span:nth-child(2) { left: 12%; animation-duration: 17s; animation-delay: -8s; }
+.petals span:nth-child(3) { left: 19%; animation-duration: 11s; animation-delay: -5s; }
+.petals span:nth-child(4) { left: 27%; animation-duration: 19s; animation-delay: -11s; }
+.petals span:nth-child(5) { left: 34%; animation-duration: 15s; animation-delay: -3s; }
+.petals span:nth-child(6) { left: 42%; animation-duration: 12s; animation-delay: -9s; }
+.petals span:nth-child(7) { left: 49%; animation-duration: 18s; animation-delay: -1s; }
+.petals span:nth-child(8) { left: 56%; animation-duration: 14s; animation-delay: -7s; }
+.petals span:nth-child(9) { left: 63%; animation-duration: 16s; animation-delay: -4s; }
+.petals span:nth-child(10) { left: 70%; animation-duration: 20s; animation-delay: -12s; }
+.petals span:nth-child(11) { left: 77%; animation-duration: 13s; animation-delay: -6s; }
+.petals span:nth-child(12) { left: 84%; animation-duration: 17s; animation-delay: -10s; }
+.petals span:nth-child(13) { left: 91%; animation-duration: 15s; animation-delay: -2s; }
+.petals span:nth-child(14) { left: 8%; animation-duration: 21s; animation-delay: -14s; }
+.petals span:nth-child(15) { left: 53%; animation-duration: 12s; animation-delay: -8s; }
+.petals span:nth-child(16) { left: 96%; animation-duration: 18s; animation-delay: -5s; }
+
+/* Marigold toran under the bar. Each string swings from its knot. */
+.toran {
+  position: fixed;
+  top: 62px;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  height: 48px;
+  display: flex;
+  justify-content: space-evenly;
+  pointer-events: none;
+}
+
+.toran span {
+  position: relative;
+  width: 2px;
+  height: 28px;
+  border-radius: 2px;
+  background: linear-gradient(#7c1e33, #c96a22);
+  transform-origin: top center;
+  animation: toran-sway 3.8s ease-in-out infinite;
+}
+
+.toran span::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 13px;
+  height: 13px;
+  margin-left: -6.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #fff1c4, #f0c15a 42%, #c96a22 78%);
+  box-shadow: 0 3px 0 #8d2a3e;
+}
+
+.toran span:nth-child(even) {
+  animation-duration: 4.6s;
+  animation-delay: -1.2s;
+  height: 34px;
+}
+
+.toran span:nth-child(3n) {
+  height: 22px;
+}
+
+/* A clay diya at each foot of the arch. Only the flame moves. */
+.diya {
+  position: absolute;
+  bottom: 0.85rem;
+  z-index: 2;
+  width: 22px;
+  height: 9px;
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(#f3d48a, #8d2a3e);
+  box-shadow: 0 0 0 1px rgba(243, 212, 138, 0.7);
+  pointer-events: none;
+}
+
+.diya.left { left: 1.15rem; }
+.diya.right { right: 1.15rem; }
+
+.diya::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 7px;
+  width: 9px;
+  height: 16px;
+  margin-left: -4.5px;
+  border-radius: 50% 50% 42% 42%;
+  background: radial-gradient(circle at 50% 78%, #fff8e4, #f3d48a 28%, #c96a22 62%, transparent 70%);
+  transform-origin: center bottom;
+  animation: diya-flicker 1.35s ease-in-out infinite;
+}
+
+.diya.right::before {
+  animation-delay: -0.55s;
+}
 
 @keyframes rise {
   from {
@@ -2283,9 +2398,27 @@ footer {
   to { width: 100%; }
 }
 
-@keyframes fall {
-  0% { transform: translateY(-10vh) rotate(0deg); }
-  100% { transform: translateY(110vh) rotate(240deg); }
+@keyframes fall-a {
+  0% { transform: translate3d(0, -12vh, 0) rotate(0deg); opacity: 0; }
+  12% { opacity: 0.9; }
+  100% { transform: translate3d(36px, 112vh, 0) rotate(260deg); opacity: 0.72; }
+}
+
+@keyframes fall-b {
+  0% { transform: translate3d(0, -12vh, 0) rotate(0deg); opacity: 0; }
+  12% { opacity: 0.9; }
+  100% { transform: translate3d(-42px, 112vh, 0) rotate(-240deg); opacity: 0.72; }
+}
+
+@keyframes toran-sway {
+  0%, 100% { transform: rotate(-7deg); }
+  50% { transform: rotate(7deg); }
+}
+
+@keyframes diya-flicker {
+  0%, 100% { transform: scaleY(1) scaleX(1); opacity: 0.82; }
+  35% { transform: scaleY(1.18) scaleX(0.88); opacity: 1; }
+  70% { transform: scaleY(0.88) scaleX(1.08); opacity: 0.7; }
 }
 
 @keyframes line-in {
@@ -2297,7 +2430,7 @@ footer {
   Each line of शुभ विवाह, स्नेह भरा निमंत्रण, and मंगल परिचय
   waits until its court has entered, then rises on its own beat.
 */
-.js .jharokha:not(.is-in) > *,
+.js .jharokha:not(.is-in) > *:not(.diya),
 .js .jharokha:not(.is-in) .meta-row span,
 .js .jharokha:not(.is-in) .hero-actions a,
 .js #vivah .folio:not(.is-in) > h2,
@@ -2314,7 +2447,7 @@ footer {
   opacity: 0;
 }
 
-.js .jharokha.is-in > *:not(h1):not(.meta-row):not(.hero-actions),
+.js .jharokha.is-in > *:not(h1):not(.meta-row):not(.hero-actions):not(.diya),
 .js .jharokha.is-in .meta-row span,
 .js .jharokha.is-in .hero-actions a,
 .js #vivah .folio.is-in > .lede,
@@ -2557,8 +2690,13 @@ footer {
     transform: none;
   }
 
-  .petals {
+  .petals,
+  .toran {
     display: none;
+  }
+
+  .diya::before {
+    animation: none;
   }
 
   .gate {
