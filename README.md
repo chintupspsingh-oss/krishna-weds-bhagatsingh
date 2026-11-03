@@ -1,5 +1,54 @@
 # कृष्णा कंवर एवं भगतसिंह — डिजिटल निमंत्रण
 
+## Handoff for the next AI
+
+Work only in this folder:
+
+`/Users/pushpendrasb/Desktop/krishna-weds-bhagatsingh/krishna-weds-bhagatsingh`
+
+The parent folder is not the project. This folder is the Git root.
+
+GitHub remote: `git@github.com:chintupspsingh-oss/krishna-weds-bhagatsingh.git`  
+Branch: `main`  
+Latest commit: `515b2f1` (`final commit`)
+
+### What is already done
+
+- Static invitation. No build step. Files: `index.html`, `css/styles.css`, `js/main.js`, `vercel.json`, `images/`.
+- Enter gate, maroon hero with Ganesha, staggered line motion, countdown that counts up from 00 on Enter then flips live.
+- Bride photo `images/dulhan.jpg` and groom photo `images/dulha.jpg` are the photographs the family supplied. They are not paintings.
+- Every शगुन arch has a photograph. See the image table below.
+- The closing card animates line by line when it scrolls into view. It is observed on its own in `js/main.js`. Do not add the class `reveal` to `.closing-card`, or the whole card fades and hides those lines.
+- Local preview: `python3 -m http.server 8765`, then `http://127.0.0.1:8765`. Hard-refresh after CSS or JS edits. Those files are not cache-busted in the HTML.
+
+### What is not done
+
+Vercel is not on the team yet.
+
+- Team slug: `chintupspsingh-7486`
+- Import page: `https://vercel.com/new?teamSlug=chintupspsingh-7486`
+- The Vercel CLI was signed out, so the upload was anonymous.
+- Temporary URL: `https://nimble-khaki-lwigcut.tmp.now`
+- Claim URL: `https://vercel.com/claim-deployment?code=f71fa0e9-bc67-4cae-8f17-2bcf12d335ec`
+- That temporary deployment expires about 60 minutes after 17:20 IST on 3 November 2026. If it is already gone, do not try to revive it. Import the GitHub repository instead.
+- Framework preset: **Other**. No build command. Output directory is the project root. `vercel.json` is already correct.
+- `.vercel/` is local deploy output and is listed in `.gitignore`. Do not commit it.
+
+### Rules that must stay
+
+- Do not rewrite card wording unless the user edits a phrase. Western digits only (`18 नवम्बर 2026`, `सायं 4:15`, phones `9571645611` and `9928219817`).
+- Do not invent rituals, venues, or guest lines. स्थल appears only where the card already names a place.
+- Hindi must not use Cinzel or letter-spacing.
+- Do not put the class `gate` on any image. `.gate` is the full-screen splash and sets `inset: 0`, which pins the picture to the left.
+- `name-shine` sets the text colour to ivory. Use it only on the maroon crest. Sandstone lines use `title-glow` or a plain rise.
+- Stagger delays must stay on the longhand properties (`animation-name`, `animation-duration`, `animation-timing-function`, `animation-fill-mode`). An `animation` shorthand resets the delay.
+- Do not set `transform` on hover for a `.reveal` element. The rise animation owns `transform`.
+- Map pin: `26.30204, 73.060116`. Countdown target: `2026-11-21T16:15:00+05:30`.
+- One deliberate spelling: the hosts' invitation sentence uses सुपौत्री. The bride's parent line stays सुपुत्री.
+- After a visual change, open the page, click Enter, and check the screen that changed. `prefers-reduced-motion` must include any new animated selector and must leave the text visible.
+- Do not commit or deploy unless the user asks.
+- Panihari dhun is `audio/panihari.mp3`. It is a royalty-free Rajasthani folk instrumental (Ochres of Rajasthan, Pixabay Content License), not the commercial Kohinoor Langa recording. It starts when Enter is clicked. The song icon at the top right mutes and unmutes it. Replace the mp3 to change the tune. `prefers-reduced-motion` does not start it automatically.
+
 Jodhpur royal wedding invitation for **आयुष्मती कृष्णा कंवर (दीपा)** and **आयुष्मान भ. भगतसिंह (राजसा)**.
 
 Saturday, **21 November 2026** (Vikram Samvat 2083, Kartik Shukla 12).  
@@ -21,9 +70,9 @@ Opening `index.html` directly also works. Fonts load from Google Fonts, so the f
 
 ## Put it on Vercel
 
-1. Create a Git repository in this folder and push it to GitHub.
-2. In Vercel, import that repository. Framework preset: **Other**. No build command. Output is the project root.
-3. Deploy. `vercel.json` is already set for clean URLs.
+The GitHub repository already exists. Import `chintupspsingh-oss/krishna-weds-bhagatsingh` at `https://vercel.com/new?teamSlug=chintupspsingh-7486`.
+
+Framework preset: **Other**. Leave the build command empty. The site is the project root. `vercel.json` already sets clean URLs.
 
 ## Where the words live
 
@@ -53,6 +102,22 @@ The first screen is a Mehrangarh night with a maroon jharokha patrika: Ganesha, 
 स्नेह भरा निमंत्रण is the sender's letter: a maroon crest for सोलंकी परिवार, then the address and the verse on sandstone. आशीर्वाद एवं प्रीतिभोज opens with the flower gate of Maharana Pratap Children Park (`images/park-gate.jpg`), then the park name, with the map in a gold frame. The closing wish is a haveli card on the night page. Once it enters, Krishna weds Bhagatsingh, हार्दिक शुभकामनाओं सहित, the family line, each phone, the address, and the WhatsApp button rise on their own beat. The two crest lines then keep a gold breath.
 
 मंगल परिचय opens with a haveli card: the three नमः lines on a maroon crest, then the hosts and the invitation on sandstone. The bride and groom photographs sit in a jharokha arch. The clan sits above the name on a maroon crest, and संग is the gold seal between them. The photographs live in `images/dulhan.jpg` and `images/dulha.jpg`. `images/park-gate.jpg` is the illuminated flower entrance of the park. `images/jodhpur.jpg` remains the Mehrangarh city view and is no longer used on the page. Replace a file of the same name to swap the art. The Google Maps pin uses Maharana Pratap Children Park in BJS Colony, in front of Krishna Mandir (26.30204, 73.060116).
+
+| File | Where it shows |
+| --- | --- |
+| `images/ganesha.png` | Splash and the hero crown. Transparent gold line art. |
+| `images/dulhan.jpg` | Bride, आयुष्मती कृष्णा कंवर (दीपा) |
+| `images/dulha.jpg` | Groom, आयुष्मान भ. भगतसिंह (राजसा) |
+| `images/shagun-dhritpan.jpg` | धृतपान |
+| `images/shagun-haldi.jpg` | विनायक / हल्दी-रस्म |
+| `images/shagun-mayra.jpg` | मायरा |
+| `images/shagun-bandoli.jpg` | बड़ी बान्दोली |
+| `images/shagun-baraat.jpg` | बारात स्वागत |
+| `images/shagun-ashirvad.jpg` | आशीर्वाद समारोह एवं प्रीतिभोज |
+| `images/shagun-panigrahan.jpg` | पाणिग्रहण संस्कार |
+| `images/park-gate.jpg` | Large venue photo only. Not the शगुन feast card. |
+| `images/jodhpur.jpg` | Unused. Do not put it back on the page. |
+| `images/ganesha.jpg` | Unused. The page uses `ganesha.png`. |
 
 ## Names to re-check before sharing widely
 

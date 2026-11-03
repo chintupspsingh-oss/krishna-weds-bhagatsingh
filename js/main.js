@@ -63,12 +63,56 @@
     root.classList.remove("has-gate");
     startMotion();
     startClock();
+    startDhun();
     var main = document.getElementById("top");
     if (main) main.focus();
   }
 
   if (enter) {
     enter.addEventListener("click", openGate);
+  }
+
+  /*
+    Panihari dhun plays after Enter, because that click is the guest's gesture.
+    The song icon at the top right mutes and unmutes it. Reduced motion does not
+    start the tune on its own.
+  */
+  var dhun = document.getElementById("panihari");
+  var dhunBtn = document.getElementById("dhun");
+  var dhunQuiet = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function paintDhun(on) {
+    if (!dhunBtn) return;
+    dhunBtn.classList.toggle("is-on", on);
+    dhunBtn.setAttribute("aria-pressed", on ? "true" : "false");
+    dhunBtn.setAttribute("aria-label", on ? "पनिहारी धुन चल रही है" : "पनिहारी धुन मूक है");
+  }
+
+  function startDhun() {
+    if (!dhun || dhunQuiet) return;
+    dhun.muted = false;
+    dhun.volume = 0.4;
+    var playing = dhun.play();
+    if (playing && playing.then) {
+      playing.then(function () { paintDhun(true); }).catch(function () { paintDhun(false); });
+    }
+  }
+
+  if (dhunBtn) {
+    dhunBtn.addEventListener("click", function () {
+      if (!dhun) return;
+      if (dhun.paused) {
+        dhun.muted = false;
+        dhun.volume = 0.4;
+        var playing = dhun.play();
+        if (playing && playing.then) {
+          playing.then(function () { paintDhun(true); }).catch(function () { paintDhun(false); });
+        }
+        return;
+      }
+      dhun.muted = !dhun.muted;
+      paintDhun(!dhun.muted);
+    });
   }
 
   /*

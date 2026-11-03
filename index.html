@@ -46,6 +46,14 @@
   <a class="skip" href="#vivah">मुख्य निमंत्रण पर जाएँ</a>
 
   <!--
+    Panihari dhun. The file is a royalty-free Rajasthani folk instrumental
+    (Ochres of Rajasthan, Pixabay Content License). Replace audio/panihari.mp3
+    to use another recording of the same name. It starts on Enter, and the
+    button pauses it.
+  -->
+  <audio id="panihari" src="audio/panihari.mp3" loop preload="auto"></audio>
+
+  <!--
     First screen. Decorative layers (glow, motes) are aria-hidden.
     The invitation underneath stays still until Enter Experience is clicked.
   -->
@@ -74,15 +82,32 @@
       <strong>कृष्णा · भगतसिंह</strong>
       <span>Jodhpur · 21 Nov 2026</span>
     </a>
-    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">सूची</button>
-    <nav class="nav-links" id="nav-links" aria-label="निमंत्रण के पृष्ठ">
-      <a href="#vivah">शुभ विवाह</a>
-      <a href="#parichay">परिचय</a>
-      <a href="#kshanika">क्षणिकाएँ</a>
-      <a href="#sthal">स्थल</a>
-      <a href="#parivar">परिवार</a>
-      <a href="#atithi">अतिथि</a>
-    </nav>
+    <div class="nav-end">
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">सूची</button>
+      <nav class="nav-links" id="nav-links" aria-label="निमंत्रण के पृष्ठ">
+        <a href="#vivah">शुभ विवाह</a>
+        <a href="#parichay">परिचय</a>
+        <a href="#kshanika">क्षणिकाएँ</a>
+        <a href="#sthal">स्थल</a>
+        <a href="#parivar">परिवार</a>
+        <a href="#atithi">अतिथि</a>
+      </nav>
+      <!-- Song icon. A note while the dhun is heard, a crossed note while it is muted. -->
+      <button class="dhun" id="dhun" type="button" aria-pressed="false" aria-label="पनिहारी धुन बंद है">
+        <svg class="dhun-on" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M9.2 17.2V6.4L18 4.6v8.2"/>
+          <circle cx="7.2" cy="17.2" r="2.15" fill="currentColor"/>
+          <circle cx="16" cy="12.8" r="2.15" fill="currentColor"/>
+        </svg>
+        <svg class="dhun-off" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M9.2 17.2V6.4L18 4.6v8.2"/>
+          <circle cx="7.2" cy="17.2" r="2.15" fill="currentColor"/>
+          <circle cx="16" cy="12.8" r="2.15" fill="currentColor"/>
+          <path fill="none" stroke="#07111f" stroke-width="4" stroke-linecap="round" d="M4.5 4.5l15 15"/>
+          <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4.5 4.5l15 15"/>
+        </svg>
+      </button>
+    </div>
   </header>
 
   <main id="top" tabindex="-1">
