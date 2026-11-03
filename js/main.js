@@ -75,7 +75,7 @@
   /*
     Mangal geet plays after Enter, because that click is the guest's gesture.
     The recording stays on YouTube (fQWgxAuTTZ8) and begins at 5:00.
-    The song icon at the top right mutes and unmutes the player.
+    The picture is not shown. The song icon mutes and unmutes the sound.
     Reduced motion does not start the tune on its own.
     When the video ends, playback returns to 5:00 rather than the beginning.
   */
