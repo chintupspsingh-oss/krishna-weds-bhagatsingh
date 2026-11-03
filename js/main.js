@@ -73,11 +73,17 @@
   }
 
   /*
-    Panihari dhun plays after Enter, because that click is the guest's gesture.
-    The song icon at the top right mutes and unmutes it. Reduced motion does not
-    start the tune on its own.
+    Mangal geet plays after Enter, because that click is the guest's gesture.
+    The recording stays on YouTube (fQWgxAuTTZ8) and begins at 5:00.
+    The song icon at the top right mutes and unmutes the player.
+    Reduced motion does not start the tune on its own.
+    When the video ends, playback returns to 5:00 rather than the beginning.
   */
-  var dhun = document.getElementById("panihari");
+  var YT_ID = "fQWgxAuTTZ8";
+  var YT_START = 300;
+  var ytPlayer = null;
+  var ytWanted = false;
+  var ytHold = false;
   var dhunBtn = document.getElementById("dhun");
   var dhunQuiet = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -85,33 +91,92 @@
     if (!dhunBtn) return;
     dhunBtn.classList.toggle("is-on", on);
     dhunBtn.setAttribute("aria-pressed", on ? "true" : "false");
-    dhunBtn.setAttribute("aria-label", on ? "पनिहारी धुन चल रही है" : "पनिहारी धुन मूक है");
+    dhunBtn.setAttribute("aria-label", on ? "गीत चल रहा है" : "गीत मूक है");
+  }
+
+  /* Ignore player events briefly so a late "playing" notice cannot undo a mute. */
+  function holdPaint(on) {
+    ytHold = true;
+    paintDhun(on);
+    window.setTimeout(function () { ytHold = false; }, 700);
+  }
+
+  function playFromMark() {
+    if (!ytPlayer || !ytPlayer.seekTo) return;
+    ytPlayer.seekTo(YT_START, true);
+    ytPlayer.unMute();
+    ytPlayer.setVolume(40);
+    ytPlayer.playVideo();
+    holdPaint(true);
   }
 
   function startDhun() {
-    if (!dhun || dhunQuiet) return;
-    dhun.muted = false;
-    dhun.volume = 0.4;
-    var playing = dhun.play();
-    if (playing && playing.then) {
-      playing.then(function () { paintDhun(true); }).catch(function () { paintDhun(false); });
-    }
+    if (dhunQuiet) return;
+    ytWanted = true;
+    playFromMark();
   }
+
+  /* YouTube calls this global once its player library has loaded. */
+  window.onYouTubeIframeAPIReady = function () {
+    if (!document.getElementById("yt-player")) return;
+    ytPlayer = new YT.Player("yt-player", {
+      width: "240",
+      height: "135",
+      videoId: YT_ID,
+      playerVars: {
+        start: YT_START,
+        rel: 0,
+        playsinline: 1,
+        modestbranding: 1,
+        origin: window.location.origin
+      },
+      events: {
+        onReady: function (event) {
+          var frame = event.target.getIframe();
+          if (frame) frame.title = "Gaura Shiv Ki Baiyaan Pakad Le";
+          if (ytWanted) playFromMark();
+        },
+        onStateChange: function (event) {
+          if (event.data === YT.PlayerState.ENDED) {
+            event.target.seekTo(YT_START, true);
+            event.target.playVideo();
+            return;
+          }
+          if (ytHold) return;
+          if (event.data === YT.PlayerState.PLAYING) {
+            paintDhun(!event.target.isMuted());
+          }
+          if (event.data === YT.PlayerState.PAUSED) paintDhun(false);
+        }
+      }
+    });
+  };
+
+  var ytScript = document.createElement("script");
+  ytScript.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(ytScript);
 
   if (dhunBtn) {
     dhunBtn.addEventListener("click", function () {
-      if (!dhun) return;
-      if (dhun.paused) {
-        dhun.muted = false;
-        dhun.volume = 0.4;
-        var playing = dhun.play();
-        if (playing && playing.then) {
-          playing.then(function () { paintDhun(true); }).catch(function () { paintDhun(false); });
-        }
+      if (!ytPlayer || !ytPlayer.getPlayerState) return;
+      var state = ytPlayer.getPlayerState();
+      var alive = state === YT.PlayerState.PLAYING
+        || state === YT.PlayerState.BUFFERING
+        || state === YT.PlayerState.PAUSED;
+      var sounding = dhunBtn.classList.contains("is-on");
+      if (sounding || (alive && !ytPlayer.isMuted())) {
+        ytPlayer.mute();
+        holdPaint(false);
         return;
       }
-      dhun.muted = !dhun.muted;
-      paintDhun(!dhun.muted);
+      if (alive) {
+        ytPlayer.unMute();
+        ytPlayer.setVolume(40);
+        if (state === YT.PlayerState.PAUSED) ytPlayer.playVideo();
+        holdPaint(true);
+        return;
+      }
+      playFromMark();
     });
   }
 

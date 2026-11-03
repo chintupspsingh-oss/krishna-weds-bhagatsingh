@@ -48,7 +48,7 @@ Vercel is not on the team yet.
 - One deliberate spelling: the hosts' invitation sentence uses सुपौत्री. The bride's parent line stays सुपुत्री.
 - After a visual change, open the page, click Enter, and check the screen that changed. `prefers-reduced-motion` must include any new animated selector and must leave the text visible.
 - Do not commit or deploy unless the user asks.
-- Panihari dhun is `audio/panihari.mp3`. It is a royalty-free Rajasthani folk instrumental (Ochres of Rajasthan, Pixabay Content License), not the commercial Kohinoor Langa recording. It starts when Enter is clicked. The song icon at the top right mutes and unmutes it. Replace the mp3 to change the tune. `prefers-reduced-motion` does not start it automatically.
+- The geet is YouTube `fQWgxAuTTZ8` (Gaura Shiv Ki Baiyaan Pakad Le), played in YouTube's own player from **5:00** (`start: 300`). Do not download or re-host that recording. It starts when Enter is clicked. The song icon at the top right mutes and unmutes the player. When the video ends it returns to 5:00. `prefers-reduced-motion` does not start it automatically. `audio/panihari.mp3` is unused.
 
 Jodhpur royal wedding invitation for **आयुष्मती कृष्णा कंवर (दीपा)** and **आयुष्मान भ. भगतसिंह (राजसा)**.
 

@@ -46,14 +46,6 @@
   <a class="skip" href="#vivah">मुख्य निमंत्रण पर जाएँ</a>
 
   <!--
-    Panihari dhun. The file is a royalty-free Rajasthani folk instrumental
-    (Ochres of Rajasthan, Pixabay Content License). Replace audio/panihari.mp3
-    to use another recording of the same name. It starts on Enter, and the
-    button pauses it.
-  -->
-  <audio id="panihari" src="audio/panihari.mp3" loop preload="auto"></audio>
-
-  <!--
     First screen. Decorative layers (glow, motes) are aria-hidden.
     The invitation underneath stays still until Enter Experience is clicked.
   -->
@@ -93,7 +85,7 @@
         <a href="#atithi">अतिथि</a>
       </nav>
       <!-- Song icon. A note while the dhun is heard, a crossed note while it is muted. -->
-      <button class="dhun" id="dhun" type="button" aria-pressed="false" aria-label="पनिहारी धुन बंद है">
+      <button class="dhun" id="dhun" type="button" aria-pressed="false" aria-label="गीत मूक है">
         <svg class="dhun-on" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M9.2 17.2V6.4L18 4.6v8.2"/>
           <circle cx="7.2" cy="17.2" r="2.15" fill="currentColor"/>
@@ -668,6 +660,15 @@
       <p>
         <a class="btn solid" href="https://wa.me/?text=%E0%A4%95%E0%A5%83%E0%A4%B7%E0%A5%8D%E0%A4%A3%E0%A4%BE%20%E0%A4%95%E0%A4%82%E0%A4%B5%E0%A4%B0%20%E0%A4%8F%E0%A4%B5%E0%A4%82%20%E0%A4%AD%E0%A4%97%E0%A4%A4%E0%A4%B8%E0%A4%BF%E0%A4%82%E0%A4%B9%20%E0%A4%95%E0%A4%BE%20%E0%A4%B6%E0%A5%81%E0%A4%AD%20%E0%A4%B5%E0%A4%BF%E0%A4%B5%E0%A4%BE%E0%A4%B9%0A%E0%A4%B6%E0%A4%A8%E0%A4%BF%E0%A4%B5%E0%A4%BE%E0%A4%B0%2C%2021%20%E0%A4%A8%E0%A4%B5%E0%A4%AE%E0%A5%8D%E0%A4%AC%E0%A4%B0%202026%0A%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%BE%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%A4%E0%A4%BE%E0%A4%AA%20%E0%A4%AA%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%95%2C%20%E0%A4%A8%E0%A5%8D%E0%A4%AF%E0%A5%82%20%E0%A4%AC%E0%A5%80.%E0%A4%9C%E0%A5%87.%E0%A4%8F%E0%A4%B8.%2C%20%E0%A4%9C%E0%A5%8B%E0%A4%A7%E0%A4%AA%E0%A5%81%E0%A4%B0" target="_blank" rel="noopener">निमंत्रण WhatsApp पर भेजें</a>
       </p>
+    </div>
+    <!--
+      Mangal geet, streamed in YouTube's own player (not a copied file).
+      Gaura Shiv Ki Baiyaan Pakad Le, fQWgxAuTTZ8. Playback begins at 5:00
+      when the guest clicks Enter. The song icon mutes that player.
+      The player sits under the wish so it does not cover the card.
+    -->
+    <div class="yt-dhun" id="yt-dhun">
+      <div id="yt-player"></div>
     </div>
   </footer>
 
