@@ -361,4 +361,130 @@
       observer.observe(item.el);
     });
   }
+
+  /*
+    Venue map wears a gold leaf. A drag clears it; स्थल दिखाएँ clears it at once.
+    Reduced motion never draws the leaf, so the map is visible immediately.
+  */
+  (function initScratch() {
+    var box = document.getElementById("scratch");
+    var canvas = document.getElementById("scratch-foil");
+    var hint = document.getElementById("scratch-hint");
+    var skip = document.getElementById("scratch-skip");
+    if (!box || !canvas || !canvas.getContext) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      box.classList.add("is-open");
+      return;
+    }
+
+    var ctx = canvas.getContext("2d");
+    var drawing = false;
+    var revealed = false;
+    var last = null;
+    var moves = 0;
+
+    function paintFoil(w, h) {
+      var gold = ctx.createLinearGradient(0, 0, w, h);
+      gold.addColorStop(0, "#f6e7bf");
+      gold.addColorStop(0.42, "#e4c27a");
+      gold.addColorStop(1, "#b8893d");
+      ctx.globalCompositeOperation = "source-over";
+      ctx.fillStyle = gold;
+      ctx.fillRect(0, 0, w, h);
+      ctx.strokeStyle = "rgba(255, 248, 230, 0.28)";
+      ctx.lineWidth = Math.max(1, w * 0.004);
+      var gap = Math.max(14, w * 0.045);
+      for (var x = -h; x < w; x += gap) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x + h, h);
+        ctx.stroke();
+      }
+    }
+
+    function sizeFoil() {
+      if (revealed) return;
+      var rect = box.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+      paintFoil(canvas.width, canvas.height);
+    }
+
+    function point(event) {
+      var rect = canvas.getBoundingClientRect();
+      return {
+        x: (event.clientX - rect.left) * (canvas.width / rect.width),
+        y: (event.clientY - rect.top) * (canvas.height / rect.height)
+      };
+    }
+
+    function erase(x, y) {
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.beginPath();
+      ctx.arc(x, y, Math.max(22, canvas.width * 0.055), 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function stroke(from, to) {
+      var dx = to.x - from.x;
+      var dy = to.y - from.y;
+      var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      var step = Math.max(10, canvas.width * 0.02);
+      var count = Math.ceil(dist / step);
+      for (var i = 0; i <= count; i++) {
+        erase(from.x + (dx * i) / count, from.y + (dy * i) / count);
+      }
+    }
+
+    function reveal() {
+      if (revealed) return;
+      revealed = true;
+      box.classList.add("is-open");
+    }
+
+    function measure() {
+      moves += 1;
+      if (moves % 5 !== 0) return;
+      var data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      var clear = 0;
+      var samples = 0;
+      for (var i = 3; i < data.length; i += 64) {
+        samples += 1;
+        if (data[i] < 28) clear += 1;
+      }
+      var ratio = samples ? clear / samples : 0;
+      if (hint) hint.style.opacity = String(Math.max(0, 1 - ratio * 2.2));
+      if (ratio > 0.4) reveal();
+    }
+
+    canvas.addEventListener("pointerdown", function (event) {
+      if (revealed) return;
+      try { canvas.setPointerCapture(event.pointerId); } catch (err) {}
+      drawing = true;
+      last = point(event);
+      erase(last.x, last.y);
+      measure();
+    });
+    canvas.addEventListener("pointermove", function (event) {
+      if (!drawing || revealed) return;
+      var next = point(event);
+      stroke(last, next);
+      last = next;
+      measure();
+    });
+    function stop() {
+      drawing = false;
+      last = null;
+    }
+    canvas.addEventListener("pointerup", stop);
+    canvas.addEventListener("pointercancel", stop);
+    if (skip) skip.addEventListener("click", reveal);
+
+    sizeFoil();
+    window.addEventListener("resize", function () {
+      if (!revealed && moves === 0) sizeFoil();
+    });
+  })();
 })();
