@@ -745,8 +745,13 @@ html.has-gate .toran {
   50% { box-shadow: 0 0 0 5px rgba(228, 194, 122, 0.28); }
 }
 
-/* The mute control sits above the doorway. The player itself must stay
-   visibility:visible while the gate is up, or the browser withholds the sound. */
+/* The mute control sits above the doorway. .nav's own layer would trap it
+   underneath the gate, so that layer is lifted while the gate is up.
+   The player itself must stay visibility:visible, or the browser withholds the sound. */
+html.has-gate .nav {
+  z-index: auto;
+}
+
 html.has-gate .dhun {
   position: fixed;
   top: 0.85rem;
@@ -755,7 +760,8 @@ html.has-gate .dhun {
   background: rgba(7, 17, 31, 0.45);
 }
 
-/* The song plays, but the picture stays off the invitation. */
+/* The picture stays off the invitation, but the player must keep a real
+   size and full opacity. Opacity 0 makes the browser refuse the sound. */
 .yt-dhun {
   position: fixed;
   left: 0;
@@ -763,11 +769,13 @@ html.has-gate .dhun {
   width: 320px;
   height: 180px;
   margin: 0;
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
-  z-index: -1;
+  z-index: 1;
   overflow: hidden;
   border: 0;
+  transform: scale(0.02);
+  transform-origin: left bottom;
 }
 
 .yt-dhun iframe {

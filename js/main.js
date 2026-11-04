@@ -75,7 +75,7 @@
   function openGate() {
     if (!gate || gate.classList.contains("is-open") || gate.classList.contains("is-untying")) return;
     window.scrollTo(0, 0);
-    startDhun();
+    startDhun(true);
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
       revealInvitation();
@@ -124,20 +124,34 @@
     window.setTimeout(function () { ytHold = false; }, 700);
   }
 
-  function playFromMark() {
-    if (!ytPlayer || !ytPlayer.seekTo) return;
-    ytPlayer.seekTo(YT_START, true);
+  var dhunStarted = false;
+  var soundLive = false;
+
+  function playFromMark(fromUser) {
+    if (!ytPlayer || !ytPlayer.playVideo) return;
     ytPlayer.unMute();
-    ytPlayer.setVolume(40);
+    ytPlayer.setVolume(80);
+    if (!dhunStarted) {
+      ytPlayer.seekTo(YT_START, true);
+      dhunStarted = true;
+    }
     ytPlayer.playVideo();
-    holdPaint(true);
+    if (fromUser) holdPaint(true);
   }
 
-  function startDhun() {
+  function startDhun(fromUser) {
     if (dhunQuiet) return;
     ytWanted = true;
-    playFromMark();
+    playFromMark(fromUser);
   }
+
+  /* The first touch on this page is the gesture browsers require.
+     Once the song is actually heard, later taps do not restart it. */
+  window.addEventListener("pointerdown", function (event) {
+    if (soundLive || dhunQuiet) return;
+    if (event.target.closest && event.target.closest("#dhun")) return;
+    startDhun(true);
+  }, true);
 
   /* YouTube calls this global once its player library has loaded. */
   window.onYouTubeIframeAPIReady = function () {
@@ -147,6 +161,7 @@
       height: "135",
       videoId: YT_ID,
       playerVars: {
+        autoplay: 1,
         start: YT_START,
         rel: 0,
         playsinline: 1,
@@ -159,7 +174,7 @@
           if (frame) frame.title = "Gaura Shiv Ki Baiyaan Pakad Le";
           /* First page: begin as soon as the player can. A blocked autoplay
              is retried by the tap, which is still a direct user gesture. */
-          if (ytWanted || (gate && !gate.classList.contains("is-open"))) startDhun();
+          if (ytWanted || (gate && !gate.classList.contains("is-open"))) startDhun(false);
         },
         onStateChange: function (event) {
           if (event.data === YT.PlayerState.ENDED) {
@@ -167,6 +182,7 @@
             event.target.playVideo();
             return;
           }
+          if (event.data === YT.PlayerState.PLAYING && !event.target.isMuted()) soundLive = true;
           if (ytHold) return;
           if (event.data === YT.PlayerState.PLAYING) {
             paintDhun(!event.target.isMuted());
@@ -201,7 +217,7 @@
         holdPaint(true);
         return;
       }
-      playFromMark();
+      playFromMark(true);
     });
   }
 
