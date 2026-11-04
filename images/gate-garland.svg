@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 860" role="img" aria-hidden="true">
+  <defs>
+    <radialGradient id="petal" cx="35%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="0.55" stop-color="#f6efe0"/>
+      <stop offset="1" stop-color="#e4d0aa"/>
+    </radialGradient>
+  </defs>
+  <!-- Roses along the arch. Each rose is five petals and a gold heart. -->
+  <g>
+    <g transform="translate(70 250)"><g fill="url(#petal)"><ellipse rx="20" ry="12"/><ellipse rx="20" ry="12" transform="rotate(72)"/><ellipse rx="20" ry="12" transform="rotate(144)"/><ellipse rx="20" ry="12" transform="rotate(216)"/><ellipse rx="20" ry="12" transform="rotate(288)"/></g><circle r="7" fill="#e4c27a"/></g>
+    <g transform="translate(150 160)"><g fill="url(#petal)"><ellipse rx="26" ry="15"/><ellipse rx="26" ry="15" transform="rotate(72)"/><ellipse rx="26" ry="15" transform="rotate(144)"/><ellipse rx="26" ry="15" transform="rotate(216)"/><ellipse rx="26" ry="15" transform="rotate(288)"/></g><circle r="8" fill="#c96a22"/></g>
+    <g transform="translate(240 100)"><g fill="url(#petal)"><ellipse rx="22" ry="13"/><ellipse rx="22" ry="13" transform="rotate(72)"/><ellipse rx="22" ry="13" transform="rotate(144)"/><ellipse rx="22" ry="13" transform="rotate(216)"/><ellipse rx="22" ry="13" transform="rotate(288)"/></g><circle r="7" fill="#e4c27a"/></g>
+    <g transform="translate(340 62)"><g fill="url(#petal)"><ellipse rx="24" ry="14"/><ellipse rx="24" ry="14" transform="rotate(72)"/><ellipse rx="24" ry="14" transform="rotate(144)"/><ellipse rx="24" ry="14" transform="rotate(216)"/><ellipse rx="24" ry="14" transform="rotate(288)"/></g><circle r="8" fill="#f3e2b0"/></g>
+    <g transform="translate(450 48)"><g fill="url(#petal)"><ellipse rx="28" ry="16"/><ellipse rx="28" ry="16" transform="rotate(72)"/><ellipse rx="28" ry="16" transform="rotate(144)"/><ellipse rx="28" ry="16" transform="rotate(216)"/><ellipse rx="28" ry="16" transform="rotate(288)"/></g><circle r="9" fill="#e4c27a"/></g>
+    <g transform="translate(560 62)"><g fill="url(#petal)"><ellipse rx="24" ry="14"/><ellipse rx="24" ry="14" transform="rotate(72)"/><ellipse rx="24" ry="14" transform="rotate(144)"/><ellipse rx="24" ry="14" transform="rotate(216)"/><ellipse rx="24" ry="14" transform="rotate(288)"/></g><circle r="8" fill="#f3e2b0"/></g>
+    <g transform="translate(660 100)"><g fill="url(#petal)"><ellipse rx="22" ry="13"/><ellipse rx="22" ry="13" transform="rotate(72)"/><ellipse rx="22" ry="13" transform="rotate(144)"/><ellipse rx="22" ry="13" transform="rotate(216)"/><ellipse rx="22" ry="13" transform="rotate(288)"/></g><circle r="7" fill="#e4c27a"/></g>
+    <g transform="translate(750 160)"><g fill="url(#petal)"><ellipse rx="26" ry="15"/><ellipse rx="26" ry="15" transform="rotate(72)"/><ellipse rx="26" ry="15" transform="rotate(144)"/><ellipse rx="26" ry="15" transform="rotate(216)"/><ellipse rx="26" ry="15" transform="rotate(288)"/></g><circle r="8" fill="#c96a22"/></g>
+    <g transform="translate(830 250)"><g fill="url(#petal)"><ellipse rx="20" ry="12"/><ellipse rx="20" ry="12" transform="rotate(72)"/><ellipse rx="20" ry="12" transform="rotate(144)"/><ellipse rx="20" ry="12" transform="rotate(216)"/><ellipse rx="20" ry="12" transform="rotate(288)"/></g><circle r="7" fill="#e4c27a"/></g>
+  </g>
+  <!-- Hanging strands stay on the two sides so the seal and the words stay clear. -->
+  <g fill="#f7f1e6">
+    <circle cx="92" cy="300" r="6"/><circle cx="108" cy="332" r="5"/>
+    <circle cx="88" cy="364" r="6"/><circle cx="112" cy="398" r="4.5"/>
+    <circle cx="90" cy="432" r="5"/><circle cx="108" cy="466" r="4"/>
+    <circle cx="94" cy="500" r="3.5"/><circle cx="104" cy="530" r="3"/>
+    <circle cx="808" cy="300" r="6"/><circle cx="792" cy="332" r="5"/>
+    <circle cx="812" cy="364" r="6"/><circle cx="788" cy="398" r="4.5"/>
+    <circle cx="810" cy="432" r="5"/><circle cx="792" cy="466" r="4"/>
+    <circle cx="806" cy="500" r="3.5"/><circle cx="796" cy="530" r="3"/>
+    <circle cx="150" cy="230" r="5"/><circle cx="162" cy="266" r="4.5"/>
+    <circle cx="146" cy="302" r="5"/><circle cx="166" cy="338" r="4"/>
+    <circle cx="152" cy="372" r="3.5"/><circle cx="750" cy="230" r="5"/>
+    <circle cx="738" cy="266" r="4.5"/><circle cx="754" cy="302" r="5"/>
+    <circle cx="734" cy="338" r="4"/><circle cx="748" cy="372" r="3.5"/>
+  </g>
+  <g fill="#f3e2b0">
+    <circle cx="128" cy="286" r="3.2"/><circle cx="124" cy="328" r="2.8"/>
+    <circle cx="132" cy="370" r="2.4"/><circle cx="772" cy="286" r="3.2"/>
+    <circle cx="776" cy="328" r="2.8"/><circle cx="768" cy="370" r="2.4"/>
+  </g>
+</svg>

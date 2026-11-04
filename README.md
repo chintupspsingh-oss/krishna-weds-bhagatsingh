@@ -15,7 +15,7 @@ Latest commit: `515b2f1` (`final commit`)
 ### What is already done
 
 - Static invitation. No build step. Files: `index.html`, `css/styles.css`, `js/main.js`, `vercel.json`, `images/`.
-- Enter gate, maroon hero with Ganesha, flower rain, a swaying toran, diyas on the arch, staggered line motion, countdown that counts up from 00 on Enter then flips live.
+- First screen is a gold doorway on the same night. Tap the seal: the ribbon unties, the doors open, then the curtain lifts. Maroon hero with Ganesha, flower rain, a swaying toran, diyas on the arch, staggered line motion, countdown that counts up from 00 once the doors have opened, then flips live.
 - Bride photo `images/dulhan.jpg` and groom photo `images/dulha.jpg` are the photographs the family supplied. They are not paintings.
 - Every शगुन arch has a photograph. See the image table below.
 - The closing card animates line by line when it scrolls into view. It is observed on its own in `js/main.js`. Do not add the class `reveal` to `.closing-card`, or the whole card fades and hides those lines.
@@ -46,9 +46,9 @@ Vercel is not on the team yet.
 - Map pin: `26.30204, 73.060116`. Countdown target: `2026-11-21T16:15:00+05:30`.
 - पाणिग्रहण संस्कार is `रात्रि 10:15` at `प्लॉट नं. 52बी, गली नं. 13/2`. आशीर्वाद समारोह एवं प्रीतिभोज stays at महाराणा प्रताप पार्क.
 - One deliberate spelling: the hosts' invitation sentence uses सुपौत्री. The bride's parent line stays सुपुत्री.
-- After a visual change, open the page, click Enter, and check the screen that changed. `prefers-reduced-motion` must include any new animated selector and must leave the text visible.
+- After a visual change, open the page, tap the seal, and check the screen that changed. `prefers-reduced-motion` must include any new animated selector and must leave the text visible. With reduced motion the tap still opens the invitation at once, without the ribbon or the doors.
 - Do not commit or deploy unless the user asks.
-- The geet is YouTube `fQWgxAuTTZ8` (Gaura Shiv Ki Baiyaan Pakad Le), played from **5:00** (`start: 300`). The picture is not shown. Do not download or re-host that recording. It starts when Enter is clicked. The song icon at the top right mutes and unmutes it. When the video ends it returns to 5:00. `prefers-reduced-motion` does not start it automatically. `audio/panihari.mp3` is unused.
+- The geet is YouTube `fQWgxAuTTZ8` (Gaura Shiv Ki Baiyaan Pakad Le), played from **5:00** (`start: 300`). The picture is not shown. Do not download or re-host that recording. It starts on the first page when the player is ready. Do not set `visibility: hidden` on `.yt-dhun` while the gate is up, or the browser withholds the sound. If autoplay is blocked, the tap starts it, and that call must stay inside the click. The song icon at the top right mutes and unmutes it, including on the doorway. When the video ends it returns to 5:00. `prefers-reduced-motion` does not start it automatically. `audio/panihari.mp3` is unused.
 
 Jodhpur royal wedding invitation for **आयुष्मती कृष्णा कंवर (दीपा)** and **आयुष्मान भ. भगतसिंह (राजसा)**.
 
@@ -90,7 +90,7 @@ All guest-facing copy is in `index.html`, grouped by the printed card:
 
 `css/styles.css` is the look. `js/main.js` is the gate, the countdown to baraat (21 Nov 2026, 4:15 pm IST), scroll motion, and the phone menu.
 
-The first screen is a Mehrangarh night with a maroon jharokha patrika: Ganesha, the monogram, the script, the names, the shloka, and Enter Experience each arrive on their own beat. Clicking Enter lifts that curtain; the invitation underneath then rises section by section.
+The first screen is the same Mehrangarh night, full height. Two photographic gold leaves (`images/gate-door.jpg`) stand in front of a lit court (`images/gate-vista.jpg`). Roses (`images/gate-flowers.png`) and an ivory satin bow (`images/gate-bow.png`) sit in front, with a maroon seal and Tap to begin. The seal breaks, the bow and the ribbon fall away, then the leaves swing open. After that the curtain fades and the invitation underneath rises section by section. Nothing below the gate was restyled.
 
 शुभ विवाह is a maroon court arch. Lord Ganesha, the gold line drawing in `images/ganesha.png`, sits in the crown of that arch and floats on a breathing gold halo. Two diyas flicker at the foot of the arch. After Enter, rose petals, marigolds, and gold motes fall over the page, and a marigold toran sways under the bar. Neither catches clicks. They stay off the splash and off when `prefers-reduced-motion` is set. The words from Marwar through Krishna Weds Bhagatsingh each rise on their own beat once that court enters the screen. शुभ विवाह and आयुष्मती कृष्णा कंवर (दीपा) then keep their gold glow, and भगतसिंह and संग keep a quieter lift. The countdown is one sandstone plaque, divided by gold rules. On Enter the figures count up from 00 while a gold bar fills the plaque, then each change flips and the सेकंड cell keeps a gold beat. `prefers-reduced-motion` holds the figure still.
 

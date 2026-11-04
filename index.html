@@ -56,8 +56,10 @@
   <a class="skip" href="#vivah">मुख्य निमंत्रण पर जाएँ</a>
 
   <!--
-    First screen. Decorative layers (glow, motes) are aria-hidden.
-    The invitation underneath stays still until Enter Experience is clicked.
+    First screen only. The night, gold, and maroon stay the invitation's own.
+    Tap the seal: the ribbon unties, the doors swing open, then this curtain
+    lifts and the patrika underneath is unchanged.
+    Glow and motes are decorative and do not catch clicks.
   -->
   <div class="gate" id="gate" role="dialog" aria-labelledby="gate-title">
     <div class="gate-glow" aria-hidden="true"></div>
@@ -66,16 +68,32 @@
       <span></span><span></span><span></span><span></span><span></span>
       <span></span><span></span><span></span><span></span>
     </div>
-    <div class="splash">
-      <div class="splash-ganesha-wrap">
-        <img class="splash-ganesha" src="images/ganesha.png" width="1024" height="1024" alt="">
+    <div class="gate-stage">
+      <div class="doorway">
+        <!-- Court behind the leaves. The leaves swing; the flowers and the bow stay in front until the ribbon is untied. -->
+        <div class="door-well">
+          <img class="vista" src="images/gate-vista.jpg" alt="" width="864" height="1152">
+          <div class="door-scene" aria-hidden="true">
+            <div class="door door-left">
+              <img class="door-art" src="images/gate-door.jpg" alt="" width="864" height="1152">
+            </div>
+            <div class="door door-right">
+              <img class="door-art" src="images/gate-door.jpg" alt="" width="864" height="1152">
+            </div>
+          </div>
+        </div>
+        <img class="garland" src="images/gate-flowers.png" alt="" width="864" height="1152">
+        <div class="ribbon" aria-hidden="true">
+          <span class="band band-left"></span>
+          <span class="band band-right"></span>
+          <img class="bow-art" src="images/gate-bow.png" alt="" width="800" height="800">
+        </div>
+        <h1 id="gate-title" class="gate-title">Krishna &amp; Bhagatsingh</h1>
+        <button class="tap" id="enter" type="button">
+          <span class="tap-label">Tap to begin</span>
+          <span class="seal" aria-hidden="true"></span>
+        </button>
       </div>
-      <div class="splash-mark" aria-hidden="true"><span>K</span><i>&amp;</i><span>B</span></div>
-      <p class="splash-script">Celebration of Love</p>
-      <h1 id="gate-title">Krishna &amp; Bhagatsingh</h1>
-      <p class="splash-shloka">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ।</p>
-      <button class="enter" id="enter" type="button">Enter Experience</button>
-      <p class="splash-place">Jodhpur · 2026</p>
     </div>
   </div>
 
@@ -365,6 +383,11 @@
                     <span class="shagun-k">समय</span>
                     <span class="shagun-v">सायं 7:15</span>
                   </li>
+                  <li>
+                    <span class="shagun-seal" aria-hidden="true"><svg viewBox="0 0 32 32"><use href="#mark-garh"></use></svg></span>
+                    <span class="shagun-k">स्थल</span>
+                    <span class="shagun-v">महाराणा प्रताप पार्क</span>
+                  </li>
                 </ul>
               </div>
             </article>
@@ -546,8 +569,8 @@
             <h3>साडू पक्ष</h3>
             <ul>
               <li>ठा. श्री राजेन्द्रसिंहजी, ठिकाना बागोरिया</li>
-              <li>ठा. श्री दिलीपसिंहजी, ठिकाना चाणोद</li>
-              <li>ठा. श्री दीपसिंहजी, ठिकाना मदेरणा कॉलोनी</li>
+              <li>कुं. श्री दिलीपसिंहजी, ठिकाना चाणोद</li>
+              <li>कुं. श्री दीपसिंहजी, ठिकाना मदेरणा कॉलोनी</li>
             </ul>
           </div>
         </div>
@@ -631,7 +654,7 @@
             <li class="name">ठा. श्री रामसिंहजी · जेतारण</li>
             <li class="name">ठा. श्री नैनसिंह जी · बलाड़ा</li>
             <li class="name">ठा. श्री हरिसिंहजी · जयपुर</li>
-            <li class="name">ठा. श्री देवसिंहजी · जयपुर</li>
+            <li class="name">ठा. श्री देवीसिंहजी · जयपुर</li>
             <li class="name">ठा. श्री बंसी सिंह जी हाड़ा · बिलाड़ा</li>
             <li class="name">कुं. श्री रणवीर सिंह जी · बासनी</li>
             <li class="name">ठा. श्री सुरेशसिंहजी टाक · जयपुर</li>
@@ -678,7 +701,7 @@
     <!--
       Mangal geet, streamed from YouTube (not a copied file).
       Gaura Shiv Ki Baiyaan Pakad Le, fQWgxAuTTZ8. Playback begins at 5:00
-      when the guest clicks Enter. The picture is kept off the invitation;
+      when the guest taps the seal. The picture is kept off the invitation;
       the song icon mutes and unmutes the sound.
     -->
     <div class="yt-dhun" id="yt-dhun" aria-hidden="true">

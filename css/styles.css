@@ -101,9 +101,9 @@ a {
 }
 
 /* ---------- First screen ----------
-   Mehrangarh night behind a maroon jharokha patrika. Gold light breathes,
-   motes rise, then each line of the card arrives in order. Idle motion
-   (float, spin, sheen) starts after that entrance.
+   Mehrangarh night, then a gold doorway. Tap the seal and the ribbon
+   unties, the doors swing, and this curtain lifts. The patrika under it
+   is unchanged. Idle motion is the seal's pulse and a small ribbon sway.
 */
 
 html.has-gate,
@@ -122,12 +122,12 @@ html.has-gate .toran {
   z-index: 40;
   display: grid;
   place-items: center;
-  padding: 1.2rem 1rem 1.4rem;
+  padding: 0;
   background:
-    radial-gradient(ellipse at 50% 46%, rgba(92, 16, 32, 0.92), transparent 48%),
+    radial-gradient(ellipse at 50% 46%, rgba(92, 16, 32, 0.55), transparent 48%),
     radial-gradient(ellipse at 50% 100%, rgba(201, 106, 34, 0.16), transparent 36%),
     #07111f;
-  overflow: auto;
+  overflow: hidden;
   transition: opacity 0.9s ease, visibility 0.9s ease;
 }
 
@@ -135,6 +135,282 @@ html.has-gate .toran {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+}
+
+/*
+  Doorway on the first screen.
+  --tie is the shared line for the ribbon, the seal, and the label,
+  so the bow and the wax stay one knot.
+  is-untying plays the ribbon. is-opening swings the doors.
+  is-open is the existing fade, added after both have finished.
+*/
+.gate-stage {
+  position: relative;
+  z-index: 1;
+  width: min(480px, 100%);
+  height: 100%;
+  height: 100dvh;
+}
+
+.gate-title {
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 1.15rem 1rem 2.4rem;
+  background: linear-gradient(180deg, rgba(7, 17, 31, 0.72), rgba(7, 17, 31, 0));
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 7vw, 3.1rem);
+  line-height: 1;
+  color: #f7f1e6;
+  text-align: center;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+}
+
+.doorway {
+  --tie: 57%;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.door-well {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.vista {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: transform 1.6s ease, filter 1.5s ease;
+}
+
+.gate.is-opening .vista {
+  transform: scale(1.06);
+  filter: brightness(1.2);
+}
+
+.door-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  perspective: 1600px;
+}
+
+.door {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  transition: transform 1.55s cubic-bezier(0.62, 0.04, 0.18, 1);
+}
+
+.door-left {
+  left: 0;
+  transform-origin: left center;
+  transform: rotateY(-2deg);
+}
+
+.door-right {
+  right: 0;
+  transform-origin: right center;
+  transform: rotateY(2deg);
+}
+
+.gate.is-opening .door-left { transform: rotateY(-72deg); }
+.gate.is-opening .door-right { transform: rotateY(72deg); }
+
+.door-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.door-right .door-art { transform: scaleX(-1); }
+
+.garland {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  pointer-events: none;
+}
+
+.ribbon {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.band {
+  position: absolute;
+  top: var(--tie);
+  width: 46%;
+  height: 28px;
+  margin-top: -14px;
+  background: linear-gradient(180deg, #fff 0%, #f4ead8 38%, #e4d3b4 72%, #cbb892 100%);
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.28);
+}
+
+.band::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.band-left {
+  left: -2%;
+  transform-origin: right center;
+  transform: rotate(-2deg);
+}
+
+.band-right {
+  right: -2%;
+  transform-origin: left center;
+  transform: rotate(2deg);
+}
+
+/* The knot of the bow image sits on --tie. 34% is how far down that knot is. */
+.bow-art {
+  position: absolute;
+  left: 50%;
+  top: var(--tie);
+  width: min(78%, 320px);
+  height: auto;
+  transform: translate(-50%, -34%);
+  filter: drop-shadow(0 14px 16px rgba(0, 0, 0, 0.35));
+}
+
+.tap {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fbf7ef;
+  cursor: pointer;
+}
+
+.tap:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.tap-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--tie) - 11.5rem);
+  font-family: var(--latin);
+  font-size: 0.78rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+}
+
+.seal {
+  position: absolute;
+  left: 50%;
+  top: var(--tie);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 214, 206, 0.7), transparent 26%),
+    radial-gradient(circle at 40% 40%, #d45366, #8d1b31 58%, #3f0b14);
+  box-shadow:
+    0 0 0 2px rgba(246, 231, 191, 0.9),
+    0 10px 16px rgba(0, 0, 0, 0.4),
+    inset 0 -8px 12px rgba(0, 0, 0, 0.35);
+  animation: seal-wait 2.3s ease-in-out infinite;
+}
+
+.seal::before,
+.seal::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.seal::before {
+  inset: 12px;
+  border: 1.5px dashed rgba(246, 231, 191, 0.8);
+}
+
+.seal::after {
+  inset: 24px;
+  background: radial-gradient(circle at 35% 32%, rgba(255, 246, 212, 0.9), rgba(124, 30, 51, 0.15) 70%);
+}
+
+.gate.is-untying .tap { pointer-events: none; }
+
+.gate.is-untying .tap-label {
+  animation: label-away 0.32s ease forwards;
+}
+
+.gate.is-untying .seal {
+  animation: seal-break 0.62s ease forwards;
+}
+
+.gate.is-untying .bow-art {
+  animation: bow-fall 0.95s 0.12s ease-in forwards;
+}
+
+.gate.is-untying .band-left {
+  animation: band-off-left 0.8s 0.24s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.gate.is-untying .band-right {
+  animation: band-off-right 0.8s 0.24s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes seal-wait {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.07); }
+}
+
+@keyframes label-away {
+  to { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes seal-break {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  22% { transform: translate(-50%, -50%) scale(0.82); }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+@keyframes bow-fall {
+  to { transform: translate(-50%, 8%) rotate(7deg); opacity: 0; }
+}
+
+@keyframes band-off-left {
+  to { transform: translateX(-90%) rotate(-20deg); opacity: 0; }
+}
+
+@keyframes band-off-right {
+  to { transform: translateX(90%) rotate(20deg); opacity: 0; }
 }
 
 .gate-glow,
@@ -469,9 +745,14 @@ html.has-gate .toran {
   50% { box-shadow: 0 0 0 5px rgba(228, 194, 122, 0.28); }
 }
 
-html.has-gate .dhun,
-html.has-gate .yt-dhun {
-  visibility: hidden;
+/* The mute control sits above the doorway. The player itself must stay
+   visibility:visible while the gate is up, or the browser withholds the sound. */
+html.has-gate .dhun {
+  position: fixed;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 50;
+  background: rgba(7, 17, 31, 0.45);
 }
 
 /* The song plays, but the picture stays off the invitation. */
@@ -2661,6 +2942,12 @@ footer {
   .splash-mark::after,
   .enter,
   .enter::after,
+  .ribbon,
+  .seal,
+  .vista,
+  .tap-label,
+  .bow-art,
+  .band,
   .dhun,
   .dhun.is-on {
     animation: none;

@@ -1,7 +1,8 @@
 /*
   Invitation behaviour:
-  - Enter Experience covers the page on every visit
-  - after the click, each section rises into view as it is reached
+  - The gate covers the page on every visit
+  - Tap to begin unties the ribbon, then the doors open, then the patrika shows
+  - after that, each section rises into view as it is reached
   - countdown to the baraat welcome (21 Nov 2026, 4:15 pm IST)
   - mobile menu and the current section in the nav
 */
@@ -56,16 +57,36 @@
     window.setTimeout(showInView, 60);
   }
 
-  function openGate() {
-    if (!gate) return;
-    window.scrollTo(0, 0);
+  /*
+    The song must start inside the click, not in a later timer, or the
+    browser will refuse the sound. The curtain itself waits: ribbon first,
+    doors second, then the invitation. Reduced motion skips the wait.
+  */
+  function revealInvitation() {
+    if (!gate || gate.classList.contains("is-open")) return;
     gate.classList.add("is-open");
     root.classList.remove("has-gate");
     startMotion();
     startClock();
-    startDhun();
     var main = document.getElementById("top");
     if (main) main.focus();
+  }
+
+  function openGate() {
+    if (!gate || gate.classList.contains("is-open") || gate.classList.contains("is-untying")) return;
+    window.scrollTo(0, 0);
+    startDhun();
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      revealInvitation();
+      return;
+    }
+    gate.classList.add("is-untying");
+    if (enter) enter.disabled = true;
+    window.setTimeout(function () {
+      gate.classList.add("is-opening");
+    }, 1050);
+    window.setTimeout(revealInvitation, 3000);
   }
 
   if (enter) {
@@ -73,9 +94,11 @@
   }
 
   /*
-    Mangal geet plays after Enter, because that click is the guest's gesture.
-    The recording stays on YouTube (fQWgxAuTTZ8) and begins at 5:00.
-    The picture is not shown. The song icon mutes and unmutes the sound.
+    Mangal geet starts on the first page, as soon as the player is ready.
+    If the browser blocks that, Tap to begin is the gesture that starts it,
+    and that call stays inside the click. The recording stays on YouTube
+    (fQWgxAuTTZ8) and begins at 5:00. The picture is not shown.
+    The song icon mutes and unmutes the sound.
     Reduced motion does not start the tune on its own.
     When the video ends, playback returns to 5:00 rather than the beginning.
   */
@@ -134,7 +157,9 @@
         onReady: function (event) {
           var frame = event.target.getIframe();
           if (frame) frame.title = "Gaura Shiv Ki Baiyaan Pakad Le";
-          if (ytWanted) playFromMark();
+          /* First page: begin as soon as the player can. A blocked autoplay
+             is retried by the tap, which is still a direct user gesture. */
+          if (ytWanted || (gate && !gate.classList.contains("is-open"))) startDhun();
         },
         onStateChange: function (event) {
           if (event.data === YT.PlayerState.ENDED) {
